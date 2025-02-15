@@ -1,0 +1,10 @@
+rules_version = '2';
+
+// Old security rules were crazy
+service cloud.firestore {
+  match /users/{userId}/pantry/{documentId} {
+    allow read: if request.auth.uid == userId; // Only the owner can read
+    allow write: if request.auth.uid == userId; // Only the owner can write
+    allow delete: if request.auth.uid == userId; // Only the owner can delete
+  }
+}
